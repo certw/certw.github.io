@@ -10,7 +10,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 6vw;
+    font-size: 8vw;
+    animation: blinker 2s linear infinite;
+  }
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
   }
   </style>
 </head>
