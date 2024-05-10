@@ -8,62 +8,64 @@
 html, body {
   height: 100%;
   width: 100%;
-  overflow: hidden;
-}
-
-.slider {
-  position: absolute;
-  width: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
+  margin: 0;
+}
+
+.wrapper {
   font-size: 8vw;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
-.slider div {
-  min-width: 100%;
-  animation: slide 6s infinite step-end, blink 6s infinite;
+/*
+  nquotes = 2
+  fadingin = 0.5s
+  showing = 2s
+  fadingout = 0.5s
+  duration = (fadingin + showing + fadingout) * nquotes
+  delay = (n - 1) / nquotes * duration
+*/
+
+.wrapper div {
+  position: absolute;
+  opacity: 0;
+  animation: fading 6s infinite;
 }
 
-@keyframes slide {
-  0% {
-    transform: translate(0%);
-  }
-
-  50% {
-    transform: translate(-100%);
-  }
-}
-
-@keyframes blink {
+@keyframes fading {
   0% {
     opacity: 0;
   }
-  10% {
+  
+  /* fadingin / duration * 100% */
+  8.3% {
     opacity: 1;
   }
-  40% {
+  
+  /* (fadingin + showing) / duration * 100% */
+  41.6% {
     opacity: 1;
   }
+  
+  /* (fadingin + showing + fadingout) / duration * 100% */
   50% {
     opacity: 0;
   }
-  60% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
+  
   100% {
     opacity: 0;
   }
 }
+
+div:nth-child(1) { animation-delay: 0s; }
+div:nth-child(2) { animation-delay: 3s; }
 </style>
 </head>
 <body>
-<div class="slider">
+<div class="wrapper">
   <div>我沒有授權徐巧芯代表我</div>
   <div>林智堅還我飛場</div>
 </div>
