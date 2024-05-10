@@ -1,26 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>cert.tw</title>
-  <style>
-  html, body {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 8vw;
-    animation: blinker 2s linear infinite;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>cert.tw</title>
+<style>
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.slider {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  font-size: 8vw;
+  text-align: center;
+}
+
+.slider div {
+  min-width: 100%;
+  animation: slide 6s infinite step-end, blink 6s infinite;
+}
+
+@keyframes slide {
+  0% {
+    transform: translate(0%);
   }
-  @keyframes blinker {
-    50% {
-      opacity: 0;
-    }
+
+  50% {
+    transform: translate(-100%);
   }
-  </style>
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+</style>
 </head>
 <body>
-我沒有授權徐巧芯代表我
+<div class="slider">
+  <div>我沒有授權徐巧芯代表我</div>
+  <div>林智堅還我飛場</div>
+</div>
 </body>
 </html>
