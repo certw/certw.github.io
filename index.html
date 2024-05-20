@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,18 +22,17 @@ html, body {
 }
 
 /*
-  nquotes = 3
+  nquotes = 4
   fadingin = 0.5s
   showing = 2s
   fadingout = 0.5s
   duration = (fadingin + showing + fadingout) * nquotes
-  delay = (n - 1) / nquotes * duration
 */
 
 .wrapper div {
   position: absolute;
   opacity: 0;
-  animation: fading 9s infinite;
+  animation: fading 12s infinite;
 }
 
 @keyframes fading {
@@ -41,17 +41,17 @@ html, body {
   }
   
   /* fadingin / duration * 100% */
-  5.55% {
+  4.1666% {
     opacity: 1;
   }
   
   /* (fadingin + showing) / duration * 100% */
-  27.77% {
+  20.833% {
     opacity: 1;
   }
   
   /* (fadingin + showing + fadingout) / duration * 100% */
-  33.33% {
+  25% {
     opacity: 0;
   }
   
@@ -60,15 +60,19 @@ html, body {
   }
 }
 
+/* delay = (n - 1) / nquotes * duration */
 div:nth-child(1) { animation-delay: 0s; }
 div:nth-child(2) { animation-delay: 3s; }
 div:nth-child(3) { animation-delay: 6s; }
+div:nth-child(4) { animation-delay: 9s; }
 </style>
-</head>
+<script type="text/javascript" nonce="7bc6c208107d4fdc920dc276fec" src="//injections.adguard.org?ts=1716164408831&amp;type=content-script&amp;dmn=cert.tw&amp;url=https%3A%2F%2Fcert.tw%2F&amp;app=chrome.exe&amp;css=3&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1"></script>
+<script type="text/javascript" nonce="7bc6c208107d4fdc920dc276fec" src="//injections.adguard.org?ts=1716164408831&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;type=user-script"></script></head>
 <body>
 <div class="wrapper">
-  <div>馬英九還我牛</div>
+  <div>白色是最容易髒的顏色</div>
   <div>我沒有授權徐巧芯代表我</div>
+  <div>馬英九還我牛</div>
   <div>林智堅還我飛場</div>
 </div>
 </body>
