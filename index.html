@@ -1,55 +1,397 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="scroll-smooth" style="scroll-padding-top: 100px;">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>cert.tw</title>
-<style>
-html, body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ether.fi Cash - The DeFi Native Credit Card</title>
+    <meta name="description" content="Spend your crypto with the ether.fi Cash card. Earn 3% cashback and keep your yield. Sign up with code 34f79585.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ether: {
+                            dark: '#020617', // Slate 950
+                            card: '#0f172a', // Slate 900
+                            primary: '#6366f1', // Indigo 500
+                            secondary: '#a855f7', // Purple 500
+                            accent: '#38bdf8', // Sky 400
+                            success: '#22c55e'
+                        }
+                    },
+                    backgroundImage: {
+                        'hero-gradient': 'radial-gradient(ellipse at top center, #1e1b4b 0%, #020617 60%)',
+                        'card-gradient': 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)',
+                        'purple-glow': 'conic-gradient(from 90deg at 50% 50%, #020617 0%, #581c87 50%, #020617 100%)'
+                    },
+                    animation: {
+                        'tilt': 'tilt 10s infinite linear',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        tilt: {
+                            '0%, 50%, 100%': { transform: 'rotate(0deg)' },
+                            '25%': { transform: 'rotate(1deg)' },
+                            '75%': { transform: 'rotate(-1deg)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        .glass {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
 
-#quote {
-  font-size: 8vw;
-  text-align: center;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
-</style>
+        .text-gradient {
+            background: linear-gradient(to right, #818cf8, #c084fc, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-shiny {
+            position: relative;
+            overflow: hidden;
+        }
+        .card-shiny::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+            transform: skewX(-25deg);
+            transition: 0.5s;
+        }
+        .card-shiny:hover::before {
+            left: 100%;
+        }
+        
+        /* 自定義滾動條 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #020617; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569; 
+        }
+    </style>
 </head>
-<body>
-<div id="quote"></div>
-<script>
-const quotes = [
-  "<div>中華人民共和國的</div><div>祖國是中華民國</div>",
-  "<div>祖國萬歲=中華民國萬歲</div>",
-  "共產黨是犯罪組織",
-  "REST IN HELL RAISI",
-  "馬英九還我牛",
-  "林智堅還我飛場",
-];
+<body class="bg-ether-dark text-slate-100 antialiased overflow-x-hidden">
 
-const elem = document.getElementById('quote');
-let index = 0;
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass border-b border-white/5 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+                        <i class="fa-solid fa-wallet text-white text-sm"></i>
+                    </div>
+                    <span class="text-xl font-bold tracking-tight">ether.fi <span class="text-indigo-400 font-light">Cash</span></span>
+                </div>
 
-function fadeIn() {
-  elem.innerHTML = quotes[index];
-  elem.style.opacity = 1;
-  setTimeout(fadeOut, 2500);
-}
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-400">
+                    <a href="#benefits" class="hover:text-white transition-colors">Features</a>
+                    <a href="#rewards" class="hover:text-white transition-colors">Rewards</a>
+                    <a href="#tiers" class="hover:text-white transition-colors">Membership</a>
+                </div>
 
-function fadeOut() {
-  index = index + 1 >= quotes.length ? 0 : index + 1;
-  elem.style.opacity = 0;
-  setTimeout(fadeIn, 500);
-}
+                <!-- CTA -->
+                <div class="flex items-center gap-4">
+                    <a href="https://www.ether.fi/refer/34f79585" target="_blank" class="bg-white text-ether-dark hover:bg-indigo-50 px-5 py-2.5 rounded-full text-sm font-bold transition shadow-lg shadow-white/10 flex items-center gap-2 group">
+                        Get the Card
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-fadeIn();
-</script>
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Background FX -->
+        <div class="absolute top-0 left-0 w-full h-full bg-hero-gradient -z-10"></div>
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-indigo-600/10 rounded-full blur-[120px] -z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            
+            <!-- Headline -->
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
+                Your DeFi-Native <br>
+                <span class="text-gradient">Credit Card is Here.</span>
+            </h1>
+
+            <p class="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+                Spend your crypto balance anytime, anywhere. 
+                <span class="text-indigo-400 font-semibold">Repay anytime</span> with no monthly minimums. 
+                <br>
+                <span class="text-white font-bold">Up to 3% Cash back on your purchases*</span> while your portfolio grows.
+            </p>
+
+            <!-- Main CTA -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-16">
+                <a href="https://www.ether.fi/refer/34f79585" target="_blank" class="w-full sm:w-auto px-10 py-5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-xl font-bold rounded-xl shadow-xl shadow-indigo-500/25 transition transform hover:scale-[1.02] flex items-center justify-center gap-3">
+                    Apply Now
+                    <i class="fa-solid fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+
+            <!-- Card Visual -->
+            <div class="relative mx-auto max-w-sm md:max-w-md animate-float perspective-1000 group">
+                <!-- Glow behind card -->
+                <div class="absolute inset-0 bg-indigo-500/30 blur-[60px] rounded-full group-hover:bg-indigo-500/40 transition duration-500"></div>
+                
+                <!-- The Card -->
+                <div class="relative w-full aspect-[1.586/1] rounded-2xl bg-[#0a0a0a] border border-slate-700/50 shadow-2xl overflow-hidden backdrop-blur-md p-6 flex flex-col justify-between transform rotate-1 group-hover:rotate-0 group-hover:scale-[1.02] transition duration-500 ease-out">
+                    <!-- Card Texture -->
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-indigo-600/20 to-purple-600/20 rounded-full blur-[60px] -translate-y-1/2 translate-x-1/2"></div>
+                    
+                    <!-- Card Content -->
+                    <div class="relative z-10 flex justify-between items-start">
+                        <div class="flex flex-col">
+                            <span class="text-white font-bold text-xl tracking-wide">ether.fi</span>
+                            <span class="text-indigo-400 text-sm font-medium tracking-widest uppercase">Cash</span>
+                        </div>
+                        <i class="fa-solid fa-wifi text-slate-500 rotate-90 text-xl"></i>
+                    </div>
+
+                    <div class="relative z-10">
+                        <div class="w-12 h-9 bg-yellow-600/20 rounded-md border border-yellow-500/30 mb-6 flex items-center justify-center overflow-hidden">
+                             <div class="w-full h-full relative">
+                                <div class="absolute top-1/2 left-0 w-full h-[1px] bg-yellow-500/20"></div>
+                                <div class="absolute left-1/2 top-0 h-full w-[1px] bg-yellow-500/20"></div>
+                             </div>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div class="text-slate-300 font-mono text-lg tracking-widest drop-shadow-md">•••• •••• •••• 8888</div>
+                            <!-- Simple stylized debit logo -->
+                             <div class="font-bold text-white italic text-xl opacity-90">DEBIT</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div id="rewards" class="border-y border-white/5 bg-slate-900/50 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 py-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/5">
+                <div class="px-2">
+                    <div class="text-3xl font-bold text-white mb-1">Up to 3%</div>
+                    <div class="text-xs text-slate-500 uppercase font-bold tracking-widest">Cash Back on purchases*</div>
+                </div>
+                <div class="px-2">
+                    <div class="text-3xl font-bold text-white mb-1">100M+</div>
+                    <div class="text-xs text-slate-500 uppercase font-bold tracking-widest">Global Locations</div>
+                </div>
+                <div class="px-2">
+                    <div class="text-3xl font-bold text-white mb-1">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+                    <div class="text-xs text-slate-500 uppercase font-bold tracking-widest">Mobile Ready</div>
+                </div>
+                <div class="px-2">
+                    <div class="text-3xl font-bold text-white mb-1">Non-</div>
+                    <div class="text-xs text-slate-500 uppercase font-bold tracking-widest">Custodial</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="py-24 relative bg-ether-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Spend Crypto. Keep Control.</h2>
+                <p class="text-slate-400">The flexibility of a credit card with the security of DeFi.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Benefit 1 -->
+                <div class="glass p-8 rounded-2xl border-t border-white/10 hover:border-indigo-500/50 transition duration-300 group card-shiny">
+                    <div class="w-12 h-12 bg-indigo-900/50 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition text-indigo-400">
+                        <i class="fa-solid fa-rotate-left text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Repay Anytime</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Spend against your collateral. Pay back the balance whenever you want. No strict monthly minimums like traditional banks.
+                    </p>
+                </div>
+
+                <!-- Benefit 2 -->
+                <div class="glass p-8 rounded-2xl border-t border-white/10 hover:border-purple-500/50 transition duration-300 group card-shiny">
+                    <div class="w-12 h-12 bg-purple-900/50 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition text-purple-400">
+                        <i class="fa-solid fa-wallet text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Load from Anywhere</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Load your account from fiat (traditional bank) or any non-custodial wallet. Your keys, your crypto.
+                    </p>
+                </div>
+
+                <!-- Benefit 3 -->
+                <div class="glass p-8 rounded-2xl border-t border-white/10 hover:border-sky-500/50 transition duration-300 group card-shiny">
+                    <div class="w-12 h-12 bg-sky-900/50 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition text-sky-400">
+                        <i class="fa-solid fa-globe text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Global Access</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Accepted at over 100 million locations worldwide. Perfect for travel with competitive FX rates.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tiers Section -->
+    <section id="tiers" class="py-24 relative overflow-hidden bg-slate-950">
+        <!-- Background glow -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-900/10 rounded-full blur-[100px]"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Membership Tiers</h2>
+                <p class="text-slate-400">Unlock more perks as you grow your portfolio.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 items-start">
+                <!-- Core Tier -->
+                <div class="glass rounded-2xl p-8 border border-slate-800 flex flex-col h-full relative hover:bg-slate-900/80 transition">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold text-white">Core</h3>
+                        <p class="text-indigo-400 text-sm font-mono mt-1">Free for everyone</p>
+                    </div>
+                    <ul class="space-y-4 flex-1">
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fa-solid fa-check text-green-500"></i> 3% Cashback
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fa-solid fa-check text-green-500"></i> Non-custodial account
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fa-solid fa-check text-green-500"></i> Virtual Cards
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fa-solid fa-check text-green-500"></i> Mobile Payment Ready
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Luxe Tier (Highlighted) -->
+                <div class="bg-gradient-to-b from-slate-800 to-slate-900 rounded-2xl p-8 border border-indigo-500/50 shadow-2xl shadow-indigo-900/20 relative transform md:-translate-y-4 z-10 h-full">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold text-white">Luxe</h3>
+                        <p class="text-indigo-400 text-sm font-mono mt-1">10K Points Required</p>
+                    </div>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3 text-sm text-white">
+                            <i class="fa-solid fa-check text-indigo-400"></i> <b>Everything in Core</b>
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-white">
+                            <i class="fa-solid fa-plane-departure text-indigo-400"></i> Airport Lounge Access
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-white">
+                            <i class="fa-solid fa-headset text-indigo-400"></i> Priority Support
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-white">
+                            <i class="fa-solid fa-percent text-indigo-400"></i> Exclusive Hotel Discounts
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Pinnacle Tier -->
+                <div class="glass rounded-2xl p-8 border border-slate-800 flex flex-col h-full relative hover:bg-slate-900/80 transition">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold text-white">Pinnacle</h3>
+                        <p class="text-indigo-400 text-sm font-mono mt-1">50K Points Required</p>
+                    </div>
+                    <ul class="space-y-4 flex-1">
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fa-solid fa-check text-green-500"></i> Everything in Luxe
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fa-solid fa-check text-green-500"></i> Crypto Conference Access
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fa-solid fa-check text-green-500"></i> Highest Rewards Rate
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <i class="fa-solid fa-check text-green-500"></i> Metal Card
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Global CTA for Tiers -->
+            <div class="mt-12 text-center">
+                 <a href="https://www.ether.fi/refer/34f79585" target="_blank" class="inline-block bg-white text-ether-dark hover:bg-slate-200 px-8 py-3 rounded-lg font-bold transition shadow-lg shadow-white/5">
+                    Start Earning Points
+                </a>
+                <p class="text-slate-500 text-xs mt-3">Points are earned based on your deposit amount and spending activity.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex justify-center items-center gap-2 mb-6 opacity-80">
+                <div class="w-6 h-6 bg-indigo-600 rounded flex items-center justify-center">
+                    <i class="fa-solid fa-wallet text-white text-[10px]"></i>
+                </div>
+                <span class="font-bold text-lg text-slate-300">ether.fi Cash</span>
+            </div>
+            
+            <p class="text-slate-500 text-xs max-w-2xl mx-auto mb-8 leading-relaxed">
+                The content on this page is for informational purposes only. This is a referral landing page. 
+                <br><br>
+                *The Ether.Fi Cash card is not affiliated with the ether.fi protocol and is issued subject to separate terms provided by the Issuer. 
+                Cashback rates, including the 3% standard rate, are subject to Rewards Terms. 
+                Yields are variable and subject to market conditions.
+                <br><br>
+                Please review ether.fi's official terms and conditions before participating.
+            </p>
+
+            <div class="mt-8 text-slate-600 text-xs">
+                &copy; 2026 Unofficial Promotion. Not affiliated with Visa.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg', 'bg-slate-950/80');
+            } else {
+                navbar.classList.remove('shadow-lg', 'bg-slate-950/80');
+            }
+        });
+    </script>
 </body>
 </html>
